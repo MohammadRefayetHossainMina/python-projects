@@ -1,0 +1,27 @@
+### Template 2: Feature Request (`feature_request.md`)
+Use this when you (or someone else) have a cool idea for a new game mechanic, a new script, or an improvement to an existing project.
+
+```markdown
+---
+name: 🚀 Feature Request
+about: Suggest a new idea, feature, or game mechanic.
+title: "[FEATURE]: <Short description of the idea>"
+labels: enhancement
+assignees: ''
+---
+
+### 📂 Target Project
+*Which Python project or game is this feature for? (Or is it a brand new project idea?)*
+> 
+
+### 💡 Is your feature request related to a problem?
+A clear and concise description of what the problem is. (e.g., "The space invaders game is too easy, it needs a scoring difficulty scaling system.")
+
+### 🌟 Describe the Solution You'd Like
+A clear and concise description of what you want to happen.
+
+### 🛠️ Alternatives Considered
+A clear and concise description of any alternative solutions or features you've considered.
+
+### 📝 Additional Context
+Add any other context, mockup drawings, or screenshots about the feature request here.
