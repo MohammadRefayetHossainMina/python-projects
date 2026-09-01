@@ -1,6 +1,5 @@
 # Blackjack
 
-Live demo: https://mohammadrefayethossainmina.github.io/python-projects/
+Python command-line game: `b_jack.py`.
 
-- Browser table: `../index.html`
-- Original CLI: `b_jack.py`
+Live page that runs this file in the browser: https://mohammadrefayethossainmina.github.io/python-projects/

@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blackjack — Mohammad Refayet Hossain Mina</title>
+    <title>Blackjack — b_jack.py — Mohammad Refayet Hossain Mina</title>
     <meta
       name="description"
-      content="Playable browser Blackjack by Mohammad Refayet Hossain Mina, junior software developer in Sydney. Built with HTML, CSS, and JavaScript."
+      content="Playable demo of my Python Blackjack (b_jack.py). The browser loads that file and uses deal_cards, calculate_score, and compare."
     />
     <meta name="theme-color" content="#1b3a4b" />
-    <meta property="og:title" content="Blackjack — playable demo by Mohammad Refayet Hossain Mina" />
+    <meta property="og:title" content="Python Blackjack — Mohammad Refayet Hossain Mina" />
     <meta
       property="og:description"
-      content="Hit, stand, or double down in a browser Blackjack table. Vanilla JavaScript, no frameworks."
+      content="My command-line Blackjack, running in the browser from b_jack.py."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mohammadrefayethossainmina.github.io/python-projects/" />
@@ -21,13 +21,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.6/full/pyodide.js"></script>
   </head>
   <body>
-    <a class="skip" href="#table">Skip to the table</a>
+    <a class="skip" href="#play">Skip to the game</a>
 
     <header class="topbar">
       <div class="identity">
@@ -39,105 +40,52 @@
       </div>
       <nav class="links" aria-label="Profile links">
         <a href="https://www.linkedin.com/in/mohammad-mina-667576417" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/MohammadRefayetHossainMina/python-projects" target="_blank" rel="noopener noreferrer">Source</a>
-        <a href="https://github.com/MohammadRefayetHossainMina/python-projects/blob/main/Blackjack/b_jack.py" target="_blank" rel="noopener noreferrer">Python CLI</a>
+        <a href="https://github.com/MohammadRefayetHossainMina/python-projects/blob/main/Blackjack/b_jack.py" target="_blank" rel="noopener noreferrer">b_jack.py</a>
+        <a href="https://github.com/MohammadRefayetHossainMina/python-projects" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
     </header>
 
+    <p id="boot-status" class="status" role="status">Loading Python so this page can run b_jack.py…</p>
+
     <main class="layout">
-      <section class="panel about">
-        <p class="eyebrow">Portfolio demo</p>
+      <section id="play" class="panel play">
+        <p class="eyebrow">Python project · Amazon Career Choice</p>
         <h1>Blackjack</h1>
         <p class="lede">
-          A recruiter-ready table you can play in the browser. Same game I first wrote as a Python
-          command-line project, rebuilt here with HTML, CSS, and JavaScript so you do not need to
-          install anything.
+          This is the game from my file <code>Blackjack/b_jack.py</code>. The page loads that Python
+          in your browser and calls <code>deal_cards()</code>, <code>calculate_score()</code>, and
+          <code>compare()</code>. Same prompts as the command line: <strong>y</strong> for another
+          card, <strong>n</strong> to stand.
         </p>
-        <ul class="tags" aria-label="Technologies">
-          <li>HTML5</li>
-          <li>CSS3</li>
-          <li>JavaScript</li>
-          <li>GitHub Pages</li>
-        </ul>
-        <h2>What this shows</h2>
-        <ul class="bullets">
-          <li>Fisher–Yates shuffled six-deck shoe (not random cards with replacement)</li>
-          <li>Ace scoring as 1 or 11, natural blackjack, and dealer stand on 17</li>
-          <li>Game state: betting, player turn, dealer draw, and payout</li>
-          <li>Hit, stand, and double down, with 3:2 blackjack payout</li>
-        </ul>
-        <p class="note">Demo only — no real money. Press H, S, or D during your turn, or Enter to deal.</p>
-      </section>
 
-      <section id="table" class="table-wrap" aria-label="Blackjack table">
-        <div class="felt">
-          <p class="pays">Blackjack pays 3 to 2 · Dealer stands on 17</p>
+        <pre id="ascii" class="ascii" aria-hidden="true">BLACKJACK</pre>
 
-          <div class="seat">
-            <div class="seat-meta">
-              <span>Dealer</span>
-              <span id="dealer-score" class="score">0</span>
-            </div>
-            <div id="dealer-cards" class="cards" aria-live="polite"></div>
+        <div class="hands">
+          <div>
+            <p>Dealer</p>
+            <div id="dealer-cards" class="cards"></div>
           </div>
-
-          <p id="banner" class="banner" role="status">Place a bet, then deal.</p>
-
-          <div class="seat">
-            <div class="seat-meta">
-              <span>You</span>
-              <span id="player-score" class="score">0</span>
-            </div>
-            <div id="player-cards" class="cards" aria-live="polite"></div>
-          </div>
-
-          <div class="pot">
-            <span>Bet</span>
-            <strong id="bet-amount">$0</strong>
-          </div>
-
-          <div class="actions" id="actions">
-            <button type="button" data-action="hit" disabled>Hit</button>
-            <button type="button" data-action="stand" disabled>Stand</button>
-            <button type="button" data-action="double" disabled>Double</button>
-            <button type="button" class="primary" data-action="deal">Deal</button>
-            <button type="button" class="primary" data-action="next" hidden>Next hand</button>
+          <div>
+            <p>You</p>
+            <div id="player-cards" class="cards"></div>
           </div>
         </div>
 
-        <div class="tray">
-          <div class="bank">
-            <span>Bankroll</span>
-            <strong id="bankroll">$1,000</strong>
-          </div>
-          <div class="chips" role="group" aria-label="Chip values">
-            <button type="button" class="chip c10" data-chip="10" aria-label="Add $10">10</button>
-            <button type="button" class="chip c25" data-chip="25" aria-label="Add $25">25</button>
-            <button type="button" class="chip c50" data-chip="50" aria-label="Add $50">50</button>
-            <button type="button" class="chip c100" data-chip="100" aria-label="Add $100">100</button>
-          </div>
-          <button type="button" class="clear" data-action="clear">Clear bet</button>
+        <pre id="log" class="term" aria-live="polite"></pre>
+
+        <div class="actions">
+          <button type="button" id="btn-start" disabled>Play</button>
+          <button type="button" id="btn-y" disabled>y — another card</button>
+          <button type="button" id="btn-n" disabled>n — end game</button>
+          <button type="button" id="btn-again" disabled hidden>Play again</button>
         </div>
       </section>
 
-      <aside class="panel hud">
-        <h2>Session</h2>
-        <dl class="stats">
-          <div><dt>Wins</dt><dd id="stat-wins">0</dd></div>
-          <div><dt>Losses</dt><dd id="stat-losses">0</dd></div>
-          <div><dt>Pushes</dt><dd id="stat-pushes">0</dd></div>
-          <div><dt>Blackjacks</dt><dd id="stat-bj">0</dd></div>
-        </dl>
-        <p class="shoe">Shoe leftover: <span id="shoe-count">312</span> cards</p>
-        <h2>Rules used</h2>
-        <ul class="bullets compact">
-          <li>Six-deck shoe, reshuffled when it runs low</li>
-          <li>Dealer stands on hard or soft 17</li>
-          <li>Double down on your first two cards</li>
-          <li>No splits or insurance in this version</li>
-        </ul>
-        <button type="button" class="ghost reset" data-action="reset">Reset bankroll</button>
-      </aside>
+      <section class="panel code">
+        <h2>Source the page is running</h2>
+        <p class="lede">Fetched from this repo, then imported with Pyodide.</p>
+        <pre id="source" class="source">Loading b_jack.py…</pre>
+      </section>
     </main>
 
     <footer class="foot">

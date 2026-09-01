@@ -1,13 +1,10 @@
 # Python projects
 
-Playable demo: [Blackjack](https://mohammadrefayethossainmina.github.io/python-projects/)
+Playable demo of my Blackjack file: https://mohammadrefayethossainmina.github.io/python-projects/
 
-Built by [Mohammad Refayet Hossain Mina](https://github.com/MohammadRefayetHossainMina), junior software developer in Sydney.
+The page loads [`Blackjack/b_jack.py`](Blackjack/b_jack.py) in the browser with Pyodide and uses that file’s `deal_cards`, `calculate_score`, and `compare` functions. Same command-line choices: `y` for another card, `n` to stand.
 
 ## Blackjack
 
 - **Live page:** https://mohammadrefayethossainmina.github.io/python-projects/
-- **Browser version:** `index.html`, `styles.css`, `game.js` (vanilla HTML, CSS, and JavaScript)
-- **Original CLI:** [`Blackjack/b_jack.py`](Blackjack/b_jack.py)
-
-The web table uses a shuffled six-deck shoe, ace scoring as 1 or 11, natural blackjack at 3:2, dealer stand on 17, and double down on the first two cards.
+- **Source:** [`Blackjack/b_jack.py`](Blackjack/b_jack.py)

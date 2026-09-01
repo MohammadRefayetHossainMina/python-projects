@@ -67,5 +67,6 @@ def play_game():
     print(f'Your final cards: {user_cards} and your final score: {player_score}\n')
     print(f'Dealer final cards: {dealer_card} and the final score: {dealer_score}\n')
     print(compare(player_score, dealer_score))
-while input('\n press n if you do not want to play again or any key to continue \n').lower()!='n':
-    play_game()
+if __name__ == "__main__":
+    while input('\n press n if you do not want to play again or any key to continue \n').lower()!='n':
+        play_game()
